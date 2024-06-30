@@ -1,0 +1,102 @@
+@mixin media3Xl {
+  @media screen and (min-width: 1921px) {
+    @content;
+  }
+}
+
+@mixin res-font($minFont, $maxFont, $minBreakpoint: 340, $maxBreakpoint: 1920) {
+  $maxLessOne: $maxBreakpoint - 1;
+  $maxBreakpoint3Xl: 5120;
+  font-size: #{$minFont}px;
+
+  @media (min-width: #{$minBreakpoint}px) and (max-width: #{$maxLessOne}px) {
+    font-size: calc(
+      #{$minFont}px + (#{$maxFont} - #{$minFont}) *
+        (100vw - #{$minBreakpoint}px) / (#{$maxBreakpoint} - #{$minBreakpoint})
+    );
+  }
+
+  @include media3Xl {
+    font-size: calc(
+      #{$maxFont}px + (#{$maxFont * 2.5} - #{$maxFont}) *
+        (100vw - #{$maxBreakpoint}px) /
+        (#{$maxBreakpoint3Xl} - #{$maxBreakpoint})
+    );
+  }
+
+  //   @media (min-width: #{$maxBreakpoint}px) {
+  //     font-size: #{$maxFont}px;
+  //   }
+}
+
+@mixin res-padding($pos: "", $min, $max) {
+  padding#{$pos}: calc(
+    #{$min}px + (#{$max} - #{$min}) * ((100vw - 360px) / (1920 - 360))
+  );
+
+  @include media3Xl {
+    padding#{$pos}: calc(
+      #{$max}px + (#{$max * 2.5} - #{$max}) * ((100vw - 1920px) / (5120 - 1920))
+    );
+  }
+}
+
+@mixin res-margin($pos: "", $min, $max) {
+  margin#{$pos}: calc(
+    #{$min}px + (#{$max} - #{$min}) * ((100vw - 360px) / (1920 - 360))
+  );
+
+  @include media3Xl {
+    margin#{$pos}: calc(
+      #{$max}px + (#{$max * 2} - #{$max}) * ((100vw - 1920px) / (5120 - 1920))
+    );
+  }
+}
+
+@mixin res-width($min, $max) {
+  width: calc(
+    #{$min}px + (#{$max} - #{$min}) * ((100vw - 360px) / (1920 - 360))
+  );
+
+  @include media3Xl {
+    width: calc(
+      #{$max}px + (#{$max * 2} - #{$max}) * ((100vw - 1920px) / (5120 - 1920))
+    );
+  }
+}
+
+@mixin res-height($min, $max) {
+  height: calc(
+    #{$min}px + (#{$max} - #{$min}) * ((100vw - 360px) / (1920 - 360))
+  );
+
+  @include media3Xl {
+    height: calc(
+      #{$max}px + (#{$max * 2} - #{$max}) * ((100vw - 1920px) / (5120 - 1920))
+    );
+  }
+}
+
+@mixin res-width-percent($min, $max) {
+  width: calc(
+    #{$min}% + (#{$max} - #{$min}) * ((100vw - 360px) / (1920 - 360))
+  );
+
+  @include media3Xl {
+    width: calc(
+      #{$max}% + (#{$max * 2} - #{$max}) * ((100vw - 1920px) / (5120 - 1920))
+    );
+  }
+}
+
+@mixin res-height-percent($min, $max) {
+  height: calc(
+    #{$min}% + (#{$max} - #{$min}) * ((100vw - 360px) / (1920 - 360))
+  );
+
+  @include media3Xl {
+    height: calc(
+      #{$max}% + (#{$max * 2} - #{$max}) * ((100vw - 1920px) / (5120 - 1920))
+    );
+  }
+}

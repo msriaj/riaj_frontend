@@ -1,5 +1,5 @@
 <template>
-  <div class="body_wrapper" data-scroll-section></div>
+  <div class="body_wrapper"></div>
 </template>
 
 <script setup></script>

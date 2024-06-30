@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { $gsap } = useNuxtApp();
+// const { $gsap } = useNuxtApp();
+
+import gsap from "gsap";
 const DELAY_BETWEEN_PHOTO_LOADED = 15;
 
 const number_of_images_loaded = ref(0);
@@ -11,12 +13,12 @@ onMounted(() => {
     setTimeout(async () => {
       await document.fonts.load;
 
-      $gsap.to(".preloader__percent", {
+      gsap.to(".preloader__percent", {
         opacity: 1,
         duration: 0.2,
       });
 
-      $gsap.set("body", {
+      gsap.set("body", {
         overflow: "hidden",
       });
 
@@ -62,16 +64,17 @@ watch(
   () => progress.value,
   (number) => {
     if (number === 100) {
-      $gsap.fromTo(
+      gsap.fromTo(
         ".preloader",
         {
-          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+          clipPath: "circle(100% at 48% 0)",
         },
         {
-          clipPath: "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",
-          duration: 0.7,
+          clipPath: "circle(0% at 48% 0)",
+          // translateY: "-100%",
+          duration: 0.5,
           onComplete() {
-            $gsap.set("body", {
+            gsap.set("body", {
               clearProps: "all",
             });
           },
@@ -83,7 +86,7 @@ watch(
 </script>
 <template>
   <div class="preloader">
-    <div class="preloader__percent h3">{{ progress ? progress : 0 }}%</div>
+    <!-- <div class="preloader__percent h3">{{ progress ? progress : 0 }}%</div> -->
   </div>
 </template>
 <style lang="scss" scoped>

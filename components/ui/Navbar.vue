@@ -3,30 +3,44 @@
     <div class="nav-bar">
       <div class="logo">
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="55"
-          height="44"
-          viewBox="0 0 55 44"
+          width="80"
+          viewBox="0 0 200 115"
           fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
+          <rect y="1" width="24" height="24" fill="#393632" />
+          <rect x="51" y="1" width="24" height="24" fill="#393632" />
+          <rect x="51" y="45" width="24" height="24" fill="#393632" />
+          <rect x="102" y="1" width="24" height="24" fill="#393632" />
+          <rect x="102" y="45" width="24" height="24" fill="#393632" />
+          <rect x="102" y="89" width="24" height="24" fill="#393632" />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M3.80799 34.3752C7.76794 40.1852 14.4385 44 22 44H23.5925L23.2905 42.8341C22.4849 39.6692 20.9025 37.4825 18.5432 36.2741C16.1839 35.0082 12.6737 34.3752 8.01272 34.3752H3.80799ZM33.217 43.999C45.2673 43.8825 55 34.0778 55 22C55 9.84974 45.1503 0 33 0L27.8765 6.96375e-10C28.5278 0.429241 29.1283 0.896829 29.6778 1.40276C33.3031 4.68274 35.1157 9.22868 35.1157 15.0406C35.1157 19.0111 33.6483 22.4349 30.7136 25.3121C27.8365 28.1317 24.0674 29.858 19.4063 30.491C18.8309 30.6061 18.5432 30.865 18.5432 31.2678C18.5432 31.7857 18.8597 32.0447 19.4926 32.0447C23.3481 32.2173 26.1101 32.9366 27.7789 34.2025C29.5052 35.4685 30.7424 37.1085 31.4905 39.1225L33.217 43.999ZM0.520611 26.7794C0.17974 25.2407 0 23.6413 0 22C0 14.5545 3.69861 7.9729 9.35874 3.99222H13.4506C17.5937 3.99222 20.7298 4.97046 22.8589 6.92694C25.0456 8.82587 26.1389 11.588 26.1389 15.2132C26.1389 17.3423 25.4772 19.2988 24.1537 21.0826C22.8877 22.8089 21.1326 24.19 18.8884 25.2258C16.6442 26.2615 14.1411 26.7794 11.379 26.7794H0.520611Z"
-            fill="black"
+            d="M168.5 32C165.7 24.4 155 22.8333 150 23V0.499993C185.6 -1.90001 195.167 22.5 195.5 35C195.9 60.6 179.333 71.3333 171 73.5L199.5 114.5H168.5L145 79V56H156C173.2 51.6 171.5 38.1667 168.5 32Z"
+            fill="#393632"
           />
         </svg>
       </div>
       <div class="nav">
         <ul>
-          <li>
-            <nuxt-link to="/">Home</nuxt-link>
+          <li class="menu_items">
+            <a class="link link--leda" to="/what-i-do" data-text="What I Do">
+              <span> What I Do </span>
+            </a>
           </li>
-          <li>
-            <nuxt-link to="/about">About</nuxt-link>
+          <li class="menu_items">
+            <a class="link link--leda" to="/about" data-text="About">
+              <span> About </span>
+            </a>
           </li>
-          <li>
-            <nuxt-link to="/contact">Contact</nuxt-link>
+          <li class="menu_items">
+            <a class="link link--leda" to="/projects" data-text="Works">
+              <span> Works </span>
+            </a>
+          </li>
+          <li class="menu_items">
+            <a class="link link--leda" to="/contact" data-text="Connect">
+              <span> Connect </span>
+            </a>
           </li>
         </ul>
       </div>
@@ -34,41 +48,32 @@
   </div>
 </template>
 
-<script setup></script>
-
 <style lang="scss" scoped>
+.body_wrapper {
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
 .nav-bar {
+  z-index: 999;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 0;
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 300;
+    position: relative;
+    z-index: 2;
+  }
   .nav {
     ul {
       display: flex;
       li {
         list-style: none;
-        margin-right: 1rem;
-        a {
-          text-decoration: none;
-          color: black;
-          &::after {
-            content: "";
-            display: block;
-            width: 0;
-            height: 2px;
-            background-color: black;
-            transition: 0.3s;
-          }
-          &:hover {
-            &::after {
-              content: "";
-              display: block;
-              width: 100%;
-              height: 2px;
-              background-color: black;
-              transition: 0.3s;
-            }
-          }
+        margin-right: 3rem;
+        &:last-child {
+          margin-right: 0;
         }
       }
     }

@@ -1,14 +1,16 @@
-// import { $gsap, ScrollTrigger } from "$gsap/all";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/all";
 let scroller;
 
 const useLocomotive = () => {
   const isPageChange = useState("pageChange", () => false);
-  const { $LocomotiveScroll, $gsap, $ScrollTrigger } = useNuxtApp();
   const pageChange = (value) => {
     isPageChange.value = value;
   };
 
-  $gsap.registerPlugin($ScrollTrigger);
+  const { $LocomotiveScroll } = useNuxtApp();
+
+  gsap.registerPlugin(ScrollTrigger);
 
   // animation functions
 
@@ -24,7 +26,7 @@ const useLocomotive = () => {
     if (!el) {
       return;
     }
-    $gsap.fromTo(
+    gsap.fromTo(
       el,
       {
         autoAlpha: 0,
@@ -48,7 +50,7 @@ const useLocomotive = () => {
       console.log("Element not found on bannerImgAnim");
       return;
     }
-    $gsap.fromTo(
+    gsap.fromTo(
       el,
       {
         scale: 1,
@@ -71,7 +73,7 @@ const useLocomotive = () => {
       return;
     }
 
-    $gsap.fromTo(
+    gsap.fromTo(
       title,
       { scale: 0.95, opacity: 0.125, visibility: "hidden" },
       {
@@ -90,7 +92,7 @@ const useLocomotive = () => {
       console.log("Element not found on paragraphReveal");
       return;
     }
-    $gsap.fromTo(
+    gsap.fromTo(
       el,
       { y: 50, opacity: 0.125, visibility: "hidden" },
       {
@@ -114,7 +116,7 @@ const useLocomotive = () => {
       return;
     }
 
-    const tl = $gsap.timeline({});
+    const tl = gsap.timeline({});
     tl.fromTo(
       subText,
       { y: 50, opacity: 0, visibility: "hidden" },

@@ -1,26 +1,21 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   css: ["~/assets/scss/main.scss"],
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "~/assets/scss/_colors.scss" as *;',
+          additionalData:
+            ' @use "@/assets/scss/_variables.scss" as *; @use "@/assets/scss/_colors.scss" as *; @use "@/assets/scss/_mixins.scss" as *;  @use "@/assets/scss/_fonts.scss" as *;',
         },
       },
     },
   },
-  modules: ["@hypernym/nuxt-gsap"],
-  gsap: {
-    // composables: true,
-    extraPlugins: {
-      scrollTrigger: true,
-      flip: true,
-    },
-  },
 
-  // auto import components
+  build: {
+    transpile: ["gsap"],
+  },
 
   components: {
     dirs: [

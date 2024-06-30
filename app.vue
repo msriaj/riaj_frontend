@@ -1,5 +1,12 @@
 <template>
   <div>
+    <svg class="flitter">
+      <filter id="grainy">
+        <feTurbulence type="turbulence" baseFrequency="0.5"></feTurbulence>
+        <feColorMatrix type="saturate" values="0"></feColorMatrix>
+      </filter>
+    </svg>
+
     <Preloader />
     <NuxtLayout>
       <NuxtPage />
@@ -22,5 +29,10 @@ onMounted(() => {
   height: 100vh;
   z-index: 9999;
   background-color: $grey-800;
+}
+
+.flitter {
+  position: absolute;
+  inset: 0;
 }
 </style>

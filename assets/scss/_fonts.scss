@@ -1,0 +1,41 @@
+@font-face {
+  font-family: "PolySansGX";
+  src: url("../fonts/PolySansGX.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "PolySansItalicGX";
+  src: url("../fonts/PolySansItalicGX.woff2") format("woff2-variations");
+}
+
+@mixin font-variation-settings($name, $isItalic: false) {
+  $fontFamily: "PolySansGX";
+  @if $isItalic {
+    $fontFamily: "PolySansItalicGX";
+  }
+  font-family: $fontFamily;
+  @if $name == "SlimWide" {
+    font-variation-settings: "wght" 50, "opsz" 100, "wdth" 200;
+  }
+
+  @if $name == "NeutralWide" {
+    font-variation-settings: "wght" 100, "opsz" 100, "wdth" 200;
+  }
+
+  @if $name == "MedianWide" {
+    font-variation-settings: "wght" 150, "opsz" 100, "wdth" 200;
+  }
+
+  @if $name == "BulkyWide" {
+    font-variation-settings: "wght" 200, "opsz" 100, "wdth" 200;
+  }
+}
+
+// custom font mixin
+
+@font-face {
+  font-family: "CustomFont";
+  src: url("../fonts//custom-ff.woff2") format("woff2");
+  font-display: block;
+  font-weight: 200 900;
+}
