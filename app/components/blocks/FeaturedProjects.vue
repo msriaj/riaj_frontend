@@ -1,17 +1,16 @@
 <template>
   <div class="body_wrapper works_area">
     <div class="section_title">
-      <h2>Recent Works</h2>
+      <h2>{{ compData.title }}</h2>
     </div>
     <div class="works-section">
       <div class="project_title_list">
         <div
           class="single-project"
-          v-for="(item, index) in worksList"
+          v-for="(item, index) in compData.content"
           :key="index"
           :class="{ 'single-project--active': currentWork === item.title }"
         >
-          <!-- {{ item.categories[0]?.name }} -->
           {{ item.title }}
         </div>
       </div>
@@ -19,21 +18,16 @@
       <div class="works">
         <div
           class="works__card"
-          v-for="(item, index) in worksList"
+          v-for="(item, index) in compData.content"
           :key="index + 'works'"
           :data-color="'black'"
           :data-title="item.title"
         >
           <div class="image-area">
-            <img
-              :src="
-                'https://cms.co.design' + item.menu_image.renditions.original
-              "
-              alt="work image"
-            />
+            <WGImg :image="item.image" />
 
             <a class="btn-link">
-              <span> {{ item.categories[0]?.name }}</span>
+              <span> Details</span>
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -59,34 +53,25 @@
 <script setup>
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-// Fetch data
-const { data, error, pending } = await useAsyncData("works", () =>
-  $fetch(
-    `https://cms.co.design/api/v2/pages/?type=portfolio.workpage&fields=categories,heading_text,menu_image,industries&format=json`
-  )
-);
+
+const { compData, compId } = defineProps(["compData", "compId"]);
 
 // Initialize works data once fetched
-const worksList = ref([]);
+const worksList = ref(compData.content);
 
-if (data.value) {
-  worksList.value = data.value.items;
-}
-
-const currentWork = ref(worksList.value[0].title);
+const currentWork = ref(worksList.value[0]?.title);
 
 onMounted(() => {
   if (process.client) {
     const works = document.querySelectorAll(".works__card");
     const bgArea = document.querySelector(".works_area");
     const project_title_list = document.querySelector(".project_title_list");
-    const project_title_list_items = document.querySelectorAll(
-      ".project_title_list .single-project"
-    );
+    const project_title_list_items =
+      project_title_list.querySelectorAll(".single-project");
 
     ScrollTrigger.create({
       trigger: project_title_list_items[0],
-      start: "top 10%",
+      start: "top 35%",
       pin: ".project_title_list",
       pinSpacing: false,
       // pinSpacer: false,
@@ -98,7 +83,7 @@ onMounted(() => {
     works.forEach((work, index) => {
       ScrollTrigger.create({
         trigger: work,
-        start: "top 10%",
+        start: "top 20%",
         endTrigger: bgArea,
         end: "bottom bottom",
         scrub: 2,
@@ -144,9 +129,9 @@ onMounted(() => {
 
   .section_title {
     h2 {
-      font-weight: 500;
+      font-weight: 700;
       color: rgb(191, 191, 177);
-      @include res-font(30, 120);
+      @include res-font(30, 140);
       text-transform: uppercase;
     }
   }
@@ -155,7 +140,7 @@ onMounted(() => {
     // @include res-padding("-inline", 60, 300);
     @include res-padding("-block", 60, 200);
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 5%;
     overflow: hidden;
     .pin-text-area {
@@ -180,7 +165,7 @@ onMounted(() => {
     }
 
     .project_title_list {
-      width: 20%;
+      // width: 20%;
       position: relative;
 
       .single-project {
@@ -205,8 +190,8 @@ onMounted(() => {
       z-index: 1;
 
       gap: 15rem;
-      width: 50%;
-      // justify-content: center;
+      // width: 50%;
+      // padding-right: 10%; // justify-content: center;
       // place-items: center;
       .works__card {
         max-height: 100vh;
@@ -217,11 +202,12 @@ onMounted(() => {
         .image-area {
           position: relative;
           max-height: 80vh;
-          height: 80vh;
-          aspect-ratio: 1/1;
+          height: 50vh;
+          aspect-ratio: 1.5/1;
           border-radius: 2em;
           overflow: hidden;
-          img {
+
+          &:deep(img) {
             width: 100%;
             height: 100%;
             object-fit: cover;

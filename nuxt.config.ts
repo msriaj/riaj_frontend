@@ -1,7 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: false },
+  future: {
+    compatibilityVersion: 4,
+  },
+
   css: ["~/assets/scss/main.scss"],
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -15,6 +19,16 @@ export default defineNuxtConfig({
 
   build: {
     transpile: ["gsap"],
+  },
+
+  runtimeConfig: {
+    apiBase: process.env.VUE_APP_DEVHOST || "http://localhost:8000",
+    public: {
+      apiBase: process.env.VUE_APP_DEVHOST || "http://localhost:8000",
+      staticHost: process.env.VUE_APP_DEVHOST || "http://localhost:8000",
+      siteUrl: process.env.VUE_APP_FRONTEND || "http://localhost:3000",
+    },
+    jwtSecret: process.env.VUE_APP_JWT_SECRET,
   },
 
   components: {
@@ -34,4 +48,6 @@ export default defineNuxtConfig({
       "~/components",
     ],
   },
+
+  modules: ["@nuxt/image"],
 });

@@ -2,21 +2,16 @@
   <div class="body_wrapper" id="about-me">
     <div class="about-me-section">
       <div class="about-me-section__title">
-        <h2 class="section_title">A LITTLE BIT <br />ABOUT ME /</h2>
+        <h2 class="section_title">
+          {{ compData.title }}<br />{{ compData.title2 }}
+        </h2>
       </div>
       <div class="about-me-section__image">
-        <img src="~/assets/images/riaj.jpg" alt="Riaj" />
+        <WGImg :image="compData.image" />
         <div class="half-circle-shape"></div>
       </div>
       <div class="about-me-section__content">
-        <p>
-          ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ I am a Frontend Developer with a
-          passion for creating beautiful and functional user interfaces,
-          ensuring clean, performant code, and engaging animations. I leverage
-          my expertise in frontend development to craft beautiful, shippable web
-          experiences that not only function flawlessly but also captivate
-          users.
-        </p>
+        <div v-html="compData.description"></div>
       </div>
     </div>
   </div>
@@ -25,6 +20,8 @@
 <script setup>
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+const { compData, compId } = defineProps(["compData", "compId"]);
 
 const aboutMeAnimation = () => {
   gsap.to("#about-me", {
@@ -65,14 +62,14 @@ onMounted(() => {
       margin-bottom: -50px;
       max-width: 40%;
       margin-inline: auto;
-      img {
+      &:deep(img) {
         border-radius: 2%;
       }
     }
     .about-me-section__content {
       max-width: 45%;
       margin-inline: auto 0;
-      p {
+      &:deep(p) {
         font-size: 2rem;
         line-height: 1.5;
         mix-blend-mode: difference;

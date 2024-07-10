@@ -1,33 +1,28 @@
 <template>
   <div class="body_wrapper what-i-do">
     <div class="what-i-do__header">
-      <h2>What I DO /</h2>
-      <div class="what-i-do__header__brief">
-        I create impactful digital experiences that not only serve a purpose,
-        but also provide businesses with a clear competitive advantage.
-      </div>
+      <h2>
+        {{ compData.title || "What I Do" }}
+      </h2>
+      <div class="what-i-do__header__brief" v-html="compData.text"></div>
     </div>
     <div class="what-i-do__services">
-      <div class="what-i-do__services__single" v-for="i in 3" :key="i">
+      <div
+        class="what-i-do__services__single"
+        v-for="service in compData.service_content"
+        :key="i"
+      >
         <div class="what-i-do__services__single__title">
-          <h2>Web Development</h2>
+          <h2>{{ service.title }}</h2>
         </div>
         <div class="bottom-area">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis
-            quae veniam dolores, corrupti voluptate, tempore iusto quasi quidem
-            repudiandae, similique alias nam fugiat ullam ea nulla nesciunt?
-            Veritatis, recusandae voluptatem.
-          </p>
+          <div v-html="service.text"></div>
           <div class="what-i-do__services__single__sub">
-            <div class="what-i-do__services__single__sub_item">
-              CMS Integration
-            </div>
-            <div class="what-i-do__services__single__sub_item">
-              CMS Integration
-            </div>
-            <div class="what-i-do__services__single__sub_item">
-              CMS Integration
+            <div
+              class="what-i-do__services__single__sub_item"
+              v-for="sub in service.content"
+            >
+              <p>{{ sub.title }}</p>
             </div>
           </div>
         </div>
@@ -38,6 +33,7 @@
 
 <script setup>
 const { $ScrollTrigger } = useNuxtApp();
+const { compData, compId } = defineProps(["compData", "compId"]);
 
 onMounted(() => {
   const items = document.querySelectorAll(".what-i-do__services__single");
@@ -66,7 +62,7 @@ onMounted(() => {
 
   &__header {
     h2 {
-      font-size: 9rem;
+      @include res-font(30, 140);
       font-weight: 700;
       text-transform: uppercase;
     }

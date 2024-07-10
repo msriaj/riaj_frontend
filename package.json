@@ -10,9 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/image": "latest",
     "gsap-trial": "^3.12.5",
     "locomotive-scroll": "5.0.0-beta.8",
-    "nuxt": "^3.11.2",
+    "nuxt": "^3.12.3",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2"
   },

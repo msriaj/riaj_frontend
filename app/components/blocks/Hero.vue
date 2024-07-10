@@ -2,21 +2,20 @@
   <div class="body_wrapper hero_section">
     <div class="image-and-brief">
       <div class="left-image">
-        <img src="~/assets/images/hero.jpg" alt="developer" />
+        <WGImg :image="compData.header_image" />
       </div>
       <div class="blank"></div>
 
       <div class="right-text">
         <div class="upper-text">
-          <p>
-            Crafting beautiful and functional websites for startups, giving them
-            a launchpad for global success.
-          </p>
+          <div v-html="compData.text"></div>
         </div>
       </div>
     </div>
     <div class="developer-name">
-      <div class="title">RIAJ</div>
+      <div class="title">
+        {{ compData.title }}
+      </div>
     </div>
     <div class="circle-shape"></div>
     <div class="location body_wrapper">
@@ -30,6 +29,8 @@
 // const { $gsap, $ScrollTrigger } = useNuxtApp();
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+const { compData, pageData } = defineProps(["compData", "pageData"]);
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,7 +114,7 @@ onMounted(() => {
     padding-bottom: 10rem;
 
     .left-image {
-      img {
+      &:deep(img) {
         // relative col-span-3 hidden aspect-[3/3.5] h-full w-full  overflow-clip rounded-lg md:block
         width: 100%;
         aspect-ratio: 3/3.5;
@@ -129,7 +130,7 @@ onMounted(() => {
       justify-content: center;
       position: relative;
       .upper-text {
-        p {
+        &:deep(p) {
           font-size: 2.5rem;
           font-weight: 400;
           color: rgb(107, 100, 92);
